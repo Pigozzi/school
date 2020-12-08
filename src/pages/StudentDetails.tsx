@@ -1,8 +1,29 @@
-import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
+import api from '../services/api';
 
 export default function StudentDetails() {
+    const [student_id, setStudentId] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const navigation = useNavigation();
+
+    async function handleCreateStudent() {
+
+        const data = {
+            student_id,
+            firstName,
+            phone
+        }
+
+        await api.post('students', data);
+
+        navigation.navigate('studentForm');
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Sign Up</Text>
@@ -17,15 +38,30 @@ export default function StudentDetails() {
             </View>
 
             <Text style={styles.label}>STUDENT ID #</Text>
-            <TextInput style={styles.input} placeholder="Enter Your ID Number" />
+            <TextInput
+                style={styles.input}
+                value={student_id}
+                placeholder="Enter Your ID Number"
+                onChangeText={setStudentId}
+            />
 
             <Text style={styles.label}>FIRST NAME</Text>
-            <TextInput style={styles.input} placeholder="Enter Your Name" />
+            <TextInput
+                style={styles.input}
+                value={firstName}
+                placeholder="Enter Your Name"
+                onChangeText={setFirstName}
+            />
 
             <Text style={styles.label}>PHONE NUMBER</Text>
-            <TextInput style={styles.input} placeholder="Enter Your Phone Number" />
+            <TextInput
+                style={styles.input}
+                value={phone}
+                placeholder="Enter Your Phone Number"
+                onChangeText={setPhone}
+            />
 
-            <RectButton style={styles.buttonSubmit} onPress={() => { }}>
+            <RectButton style={styles.buttonSubmit} onPress={handleCreateStudent}>
                 <Text style={styles.buttonText}>Continue</Text>
             </RectButton>
 
@@ -38,6 +74,7 @@ export default function StudentDetails() {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         padding: 24,
         backgroundColor: '#F9F4FC',
         borderBottomWidth: 1,
@@ -95,7 +132,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: 56,
-        marginTop: 32,
+        marginTop: 20,
     },
     buttonText: {
         fontSize: 16,
@@ -107,7 +144,7 @@ const styles = StyleSheet.create({
         color: '#8D99AE',
         fontWeight: 'bold',
     },
-    textRed : {
+    textRed: {
         color: '#D8315B',
         fontSize: 16,
         fontWeight: 'bold',
