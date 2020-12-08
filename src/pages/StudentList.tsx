@@ -45,7 +45,6 @@ export default function StudentList() {
 
             <Text style={styles.titleTwo}>Student Interactions</Text>
 
-
             <View style={styles.header}>
                 <Text style={styles.headerText}>Nome</Text>
                 <Text style={styles.headerText}>Student ID</Text>
