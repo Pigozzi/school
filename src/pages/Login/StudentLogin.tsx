@@ -18,7 +18,7 @@ export default function StudentLogin() {
             // localStorage.setItem('student_id', student_id);
             // localStorage.setItem('name', response.data.name);
 
-            navigation.navigate('studentForm');
+            navigation.navigate('studentPanel');
         } catch (err) {
             alert('Error, STUDENT ID # not found')
         }

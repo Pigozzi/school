@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, BackHandler } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import moment from 'moment';
@@ -8,6 +8,10 @@ import global from '../styles/global';
 export default function StudentMessage() {
 
     const date = moment().format('MMMM Do YYYY');
+
+    function exitApp() {
+        BackHandler.exitApp();
+    }
 
     return (
         <View style={global.container}>
@@ -20,7 +24,7 @@ export default function StudentMessage() {
             <View style={styles.directionCenter}>
                 <Text style={styles.titleThree}>See Your Tommorow!</Text>
             </View>
-            <RectButton style={styles.buttonSubmit} onPress={() => { }}>
+            <RectButton style={styles.buttonSubmit} onPress={exitApp}>
                 <Text style={global.buttonTextSubmit}>EXIT</Text>
             </RectButton>
         </View>

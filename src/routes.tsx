@@ -11,9 +11,13 @@ import TeacherLogin from './pages/Login/TeacherLogin';
 import StudentCreate from './pages/Create/StudentCreate';
 import TeacherCreate from './pages/Create/TeacherCreate';
 
+import StudentPanel from './pages/StudentPanel';
+
 import StudentForm from './pages/StudentForm';
-import StudentList from './pages/StudentList';
 import StudentMessage from './pages/StudentMessage';
+
+import StudentList from './pages/StudentList';
+
 
 export default function Routes() {
     return (
@@ -38,6 +42,13 @@ export default function Routes() {
                 <Screen
                     name="teacherCreate"
                     component={TeacherCreate}
+                />
+
+                {/* PANEL */}
+
+                <Screen
+                    name="studentPanel"
+                    component={StudentPanel}
                 />
 
                 {/* OTHER ROUTES */}
