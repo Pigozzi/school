@@ -5,26 +5,27 @@ import { RectButton } from 'react-native-gesture-handler';
 import moment from 'moment';
 import api from '../services/api';
 import global from '../styles/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function StudentForm() {
 
     const presence = true;
-    const [help, setHelp] = useState('');
+    const [comment, setComment] = useState('');
 
-    // const student_id = localStorage.getItem('student_id')
-    // const name = localStorage.getItem('name');
+    // AsyncStorage.getItem('student_id')
+    // AsyncStorage.getItem('name');
+
     const date = moment().format('MMMM Do YYYY');
-
     const navigation = useNavigation();
 
     async function handleSubmitLearning() {
 
         try {
-            // await api.post('messages', presence, {
-            //     headers: {
-            //         Authorization: student_id
-            //     }
-            // });
+            await api.post('comments', presence, {
+                headers: {
+                    Authorization: 12345
+                }
+            });
             navigation.navigate('studentMessage')
 
         } catch (err) {
@@ -33,17 +34,18 @@ export default function StudentForm() {
     }
 
     async function handleSubmitHelp() {
+
         const data = {
             presence,
-            help
+            comment
         }
 
         try {
-            // await api.post('messages', data, {
-            //     headers: {
-            //         Authorization: student_id
-            //     }
-            // });
+            await api.post('comments', data, {
+                headers: {
+                    Authorization: 12345
+                }
+            });
             navigation.navigate('studentMessage');
         } catch (err) {
             alert('Error to send message');
@@ -52,7 +54,7 @@ export default function StudentForm() {
 
     return (
         <View style={global.container}>
-            <Text style={styles.title}>Good Morning, {name}</Text>
+            <Text style={styles.title}>Good Morning, {}</Text>
             <View style={styles.directionRight}>
                 <Text style={styles.titleDate}>{date}</Text>
             </View>
@@ -67,8 +69,8 @@ export default function StudentForm() {
 
             <TextInput
                 style={[global.input, { height: 110 }]}
-                value={help}
-                onChangeText={setHelp}
+                value={comment}
+                onChangeText={setComment}
                 multiline
                 placeholder="Please tell me how I can help you!"
             />

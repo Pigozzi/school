@@ -5,6 +5,7 @@ import { RectButton, TextInput } from 'react-native-gesture-handler';
 
 import api from '../../services/api';
 import global from '../../styles/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function StudentLogin() {
     const [student_id, setStudentId] = useState('');
@@ -12,11 +13,12 @@ export default function StudentLogin() {
     const navigation = useNavigation();
 
     async function handleStudentLogin() {
-        try {
-            // const response = await api.post('sessions', { student_id })
 
-            // localStorage.setItem('student_id', student_id);
-            // localStorage.setItem('name', response.data.name);
+        try {
+            const response = await api.post('sessions', { student_id })
+
+            AsyncStorage.setItem('student_id', student_id);
+            AsyncStorage.setItem('firstName', response.data.firstName);
 
             navigation.navigate('studentPanel');
         } catch (err) {

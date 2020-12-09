@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { View, Text, StyleSheet } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import api from '../services/api';
 import global from '../styles/global';
 
+interface Comment {
+    id: number;
+    comment: string;
+    created_at: string;
+    student_id: string;
+}
+
 export default function StudentPanel() {
+    const [comments, setComments] = useState<Comment[]>([])
+
+    // AsyncStorage.getItem('student_id');
+    // AsyncStorage.getItem('firstName');
+
+    useEffect(() => {
+        api.get('profile', {
+            headers: {
+                Authorization: 12345,
+            }
+        }).then(response => {
+            setComments(response.data)
+        })
+    }, [12345])
+
     return (
         <View style={global.container}>
 
-            <Text style={styles.title}>HELLO, JOHN</Text>
+            <Text style={styles.title}>HELLO, { }</Text>
 
             <View style={styles.directionCenter}>
                 <Text style={styles.titleTwo}>MESSAGE HISTORY </Text>
@@ -21,66 +46,14 @@ export default function StudentPanel() {
             </View>
 
             <ScrollView style={{ height: 350 }}>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 6, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 5, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>December 4, 2020</Text>
-                    <Text style={styles.row}>Completed</Text>
-                </View>
+                {comments.map(comment => {
+                    return (
+                        <View style={styles.listWrapper} key={comment.id}>
+                            <Text style={styles.row}>{comment.created_at}</Text>
+                            <Text style={styles.row}>Completed</Text>
+                        </View>
+                    )
+                })}
             </ScrollView>
 
             <RectButton style={styles.buttonSubmit} onPress={() => { }}>
