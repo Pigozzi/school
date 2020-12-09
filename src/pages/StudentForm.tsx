@@ -11,8 +11,8 @@ export default function StudentForm() {
     const presence = true;
     const [help, setHelp] = useState('');
 
-    const student_id = localStorage.getItem('student_id')
-    const name = localStorage.getItem('name');
+    // const student_id = localStorage.getItem('student_id')
+    // const name = localStorage.getItem('name');
     const date = moment().format('MMMM Do YYYY');
 
     const navigation = useNavigation();
@@ -20,12 +20,12 @@ export default function StudentForm() {
     async function handleSubmitLearning() {
 
         try {
-            await api.post('messages', presence, {
-                headers: {
-                    Authorization: student_id
-                }
-            });
-            navigation.navigate('studentList')
+            // await api.post('messages', presence, {
+            //     headers: {
+            //         Authorization: student_id
+            //     }
+            // });
+            navigation.navigate('studentMessage')
 
         } catch (err) {
             alert('Error to send message');
@@ -39,12 +39,12 @@ export default function StudentForm() {
         }
 
         try {
-            await api.post('messages', data, {
-                headers: {
-                    Authorization: student_id
-                }
-            });
-            navigation.navigate('studentList');
+            // await api.post('messages', data, {
+            //     headers: {
+            //         Authorization: student_id
+            //     }
+            // });
+            navigation.navigate('studentMessage');
         } catch (err) {
             alert('Error to send message');
         }

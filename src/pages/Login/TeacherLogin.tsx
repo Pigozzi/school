@@ -12,6 +12,22 @@ export default function StudentDetails() {
 
     const navigation = useNavigation();
 
+    async function handleTeacherLogin() {
+
+        // const data = {
+        //     email,
+        //     password
+        // }
+
+        // try {
+        //     await api.post('teacher', data);
+        //     navigation.navigate('teacherPanel');
+        // } catch (err) {
+        //     alert('Email or password invalid');
+        // }
+
+    }
+
     return (
         <View style={global.container}>
             <Text style={global.title}>Sign In</Text>
@@ -41,7 +57,7 @@ export default function StudentDetails() {
                 onChangeText={setPassword}
             />
 
-            <RectButton style={global.buttonSubmit} onPress={() => navigation.navigate('studentList')}>
+            <RectButton style={global.buttonSubmit} onPress={handleTeacherLogin}>
                 <Text style={global.buttonTextSubmit}>Continue</Text>
             </RectButton>
 

@@ -13,6 +13,7 @@ import TeacherCreate from './pages/Create/TeacherCreate';
 
 import StudentForm from './pages/StudentForm';
 import StudentList from './pages/StudentList';
+import StudentMessage from './pages/StudentMessage';
 
 export default function Routes() {
     return (
@@ -47,6 +48,10 @@ export default function Routes() {
                 <Screen
                     name="studentList"
                     component={StudentList}
+                />
+                <Screen 
+                    name="studentMessage"
+                    component={StudentMessage}
                 />
             </Navigator>
         </NavigationContainer>

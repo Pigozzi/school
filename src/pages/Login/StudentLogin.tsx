@@ -11,14 +11,14 @@ export default function StudentLogin() {
 
     const navigation = useNavigation();
 
-    async function handleLogin() {
+    async function handleStudentLogin() {
         try {
-            const response = await api.post('sessions', { student_id })
+            // const response = await api.post('sessions', { student_id })
 
-            localStorage.setItem('student_id', student_id);
-            localStorage.setItem('name', response.data.name);
+            // localStorage.setItem('student_id', student_id);
+            // localStorage.setItem('name', response.data.name);
 
-            navigation.navigate('studentPanel');
+            navigation.navigate('studentForm');
         } catch (err) {
             alert('Error, STUDENT ID # not found')
         }
@@ -45,7 +45,7 @@ export default function StudentLogin() {
                 onChangeText={setStudentId}
             />
 
-            <RectButton style={global.buttonSubmit} onPress={handleLogin}>
+            <RectButton style={global.buttonSubmit} onPress={handleStudentLogin}>
                 <Text style={global.buttonTextSubmit}>Continue</Text>
             </RectButton>
 
