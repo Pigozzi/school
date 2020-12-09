@@ -1,14 +1,15 @@
-import DateTimePicker from '@react-native-community/datetimepicker';
 import React, { useState } from 'react';
-import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+import global from '../styles/global';
 
 export default function StudentList() {
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-
-    const tableHead = ['Name', 'Student ID', 'Status'];
 
     const onChange = (event: any, selectedDate: any) => {
         const currentDate = selectedDate || date;
@@ -26,7 +27,7 @@ export default function StudentList() {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={global.container}>
             <Text style={styles.title}>Student Interaction Data</Text>
 
             <View style={styles.selectDate}>
@@ -45,83 +46,12 @@ export default function StudentList() {
 
             <Text style={styles.titleTwo}>Student Interactions</Text>
 
-
             <View style={styles.header}>
                 <Text style={styles.headerText}>Nome</Text>
                 <Text style={styles.headerText}>Student ID</Text>
                 <Text style={styles.headerText}>Phone</Text>
             </View>
-            <ScrollView style={{height: 240}}>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>15785892</Text>
-                    <Text style={styles.row}>C</Text>
-                </View>
+            <ScrollView style={{ height: 240 }}>
                 <View style={styles.listWrapper}>
                     <Text style={styles.row}>Ada Lovelace</Text>
                     <Text style={styles.row}>15785892</Text>
@@ -149,27 +79,7 @@ export default function StudentList() {
             <View style={styles.header}>
                 <Text style={styles.headerText}>Results</Text>
             </View>
-            <ScrollView style={{height: 240}}>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>December, 10</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>December, 10</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>December, 10</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>December, 10</Text>
-                </View>
-                <View style={styles.listWrapper}>
-                    <Text style={styles.row}>Ada Lovelace</Text>
-                    <Text style={styles.row}>December, 10</Text>
-                </View>
+            <ScrollView style={{ height: 240 }}>
                 <View style={styles.listWrapper}>
                     <Text style={styles.row}>Ada Lovelace</Text>
                     <Text style={styles.row}>December, 10</Text>
@@ -192,14 +102,6 @@ export default function StudentList() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 24,
-        backgroundColor: '#F9F4FC',
-        borderBottomWidth: 1,
-        borderColor: '#DDE3F0',
-        paddingTop: 50,
-    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
