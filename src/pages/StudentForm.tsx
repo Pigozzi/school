@@ -1,20 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-
+import moment from 'moment';
+import api from '../services/api';
 import global from '../styles/global';
 
 export default function StudentForm() {
+
+    const presence = true;
+    const [help, setHelp] = useState('');
+
+    const student_id = localStorage.getItem('student_id')
+    const name = localStorage.getItem('name');
+    const date = moment().format('MMMM Do YYYY');
+
+    const navigation = useNavigation();
+
+    async function handleSubmitLearning() {
+
+        try {
+            await api.post('messages', presence, {
+                headers: {
+                    Authorization: student_id
+                }
+            });
+            navigation.navigate('studentList')
+
+        } catch (err) {
+            alert('Error to send message');
+        }
+    }
+
+    async function handleSubmitHelp() {
+        const data = {
+            presence,
+            help
+        }
+
+        try {
+            await api.post('messages', data, {
+                headers: {
+                    Authorization: student_id
+                }
+            });
+            navigation.navigate('studentList');
+        } catch (err) {
+            alert('Error to send message');
+        }
+    }
+
     return (
         <View style={global.container}>
-            <Text style={styles.title}>Good Morning, John</Text>
+            <Text style={styles.title}>Good Morning, {name}</Text>
             <View style={styles.directionRight}>
-                <Text style={styles.titleDate}>December 4, 2020</Text>
+                <Text style={styles.titleDate}>{date}</Text>
             </View>
 
             <Text style={styles.titleTwo}>Please Click Below to Submit Your Attendance for Today!</Text>
 
-            <RectButton style={styles.buttonLearning} onPress={() => { }}>
+            <RectButton style={styles.buttonLearning} onPress={handleSubmitLearning}>
                 <Text style={global.buttonTextSubmit}>Yes, I am engaged in learning today!!</Text>
             </RectButton>
 
@@ -22,11 +67,13 @@ export default function StudentForm() {
 
             <TextInput
                 style={[global.input, { height: 110 }]}
+                value={help}
+                onChangeText={setHelp}
                 multiline
                 placeholder="Please tell me how I can help you!"
             />
 
-            <RectButton style={styles.buttonSubmit} onPress={() => { }}>
+            <RectButton style={styles.buttonSubmit} onPress={handleSubmitHelp}>
                 <Text style={global.buttonTextSubmit}>Submit</Text>
             </RectButton>
         </View>

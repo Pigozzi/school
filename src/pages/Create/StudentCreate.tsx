@@ -21,9 +21,13 @@ export default function StudentDetails() {
             phone
         }
 
-        await api.post('students', data);
+        try {
+            await api.post('students', data);
+            navigation.navigate('studentForm');
 
-        navigation.navigate('studentForm');
+        } catch (err) {
+            alert('Error to create a new student')
+        }
     }
 
     return (

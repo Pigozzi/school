@@ -14,6 +14,28 @@ export default function TeacherCreate() {
 
     const navigation = useNavigation();
 
+    async function handleSubmit() {
+
+        if(password != confirmPassword) {
+            alert('Password incorrent')
+            return;
+        }
+
+        const data = {
+            email,
+            firstName,
+            password,
+        }
+
+        try {
+            await api.post('teachers', data);
+            navigation.navigate('studentList');
+        } catch (err) {
+            alert('Error to create a new teacher');
+        }
+
+    }
+
     return (
         <View style={global.container}>
             <ScrollView>
@@ -60,7 +82,7 @@ export default function TeacherCreate() {
                     onChangeText={setConfirmPassword}
                 />
 
-                <RectButton style={global.buttonSubmit} onPress={() => {}}>
+                <RectButton style={global.buttonSubmit} onPress={handleSubmit}>
                     <Text style={global.buttonTextSubmit}>Continue</Text>
                 </RectButton>
 

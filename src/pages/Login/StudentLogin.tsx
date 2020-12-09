@@ -11,6 +11,19 @@ export default function StudentLogin() {
 
     const navigation = useNavigation();
 
+    async function handleLogin() {
+        try {
+            const response = await api.post('sessions', { student_id })
+
+            localStorage.setItem('student_id', student_id);
+            localStorage.setItem('name', response.data.name);
+
+            navigation.navigate('studentPanel');
+        } catch (err) {
+            alert('Error, STUDENT ID # not found')
+        }
+    }
+
     return (
         <View style={global.container}>
             <Text style={global.title}>Sign In</Text>
@@ -32,7 +45,7 @@ export default function StudentLogin() {
                 onChangeText={setStudentId}
             />
 
-            <RectButton style={global.buttonSubmit} onPress={() => navigation.navigate('studentForm')}>
+            <RectButton style={global.buttonSubmit} onPress={handleLogin}>
                 <Text style={global.buttonTextSubmit}>Continue</Text>
             </RectButton>
 
