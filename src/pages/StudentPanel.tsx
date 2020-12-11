@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, BackHandler } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,24 +17,42 @@ interface Comment {
 
 export default function StudentPanel() {
     const [comments, setComments] = useState<Comment[]>([])
+    const [firstName, setFirstName] = useState('')
+    const [student_id, setStudentId] = useState('');
 
-    // AsyncStorage.getItem('student_id');
-    // AsyncStorage.getItem('firstName');
+    const load = async () => {
+        try {
+            let name = await AsyncStorage.getItem("firstName")
+            let id = await AsyncStorage.getItem("student_id")
+
+            if (id !== null) { setStudentId(id) }
+            if (name !== null) { setFirstName(name) }
+
+        } catch (err) {
+            alert(err)
+        }
+    }
 
     useEffect(() => {
+        load();
+
         api.get('profile', {
             headers: {
-                Authorization: 12345,
+                Authorization: student_id,
             }
         }).then(response => {
             setComments(response.data)
         })
-    }, [12345])
+    }, [student_id])
+
+    function exitApp() {
+        BackHandler.exitApp();
+    }
 
     return (
         <View style={global.container}>
 
-            <Text style={styles.title}>HELLO, { }</Text>
+            <Text style={styles.title}>HELLO, {firstName.toUpperCase()}</Text>
 
             <View style={styles.directionCenter}>
                 <Text style={styles.titleTwo}>MESSAGE HISTORY </Text>
@@ -56,11 +74,10 @@ export default function StudentPanel() {
                 })}
             </ScrollView>
 
-            <RectButton style={styles.buttonSubmit} onPress={() => { }}>
+            <RectButton style={styles.buttonSubmit} onPress={exitApp}>
                 <Text style={global.buttonTextSubmit}>EXIT</Text>
             </RectButton>
         </View>
-
     );
 }
 

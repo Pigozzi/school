@@ -17,8 +17,8 @@ export default function StudentLogin() {
         try {
             const response = await api.post('sessions', { student_id })
 
-            AsyncStorage.setItem('student_id', student_id);
-            AsyncStorage.setItem('firstName', response.data.firstName);
+            await AsyncStorage.setItem('student_id', student_id);
+            await AsyncStorage.setItem('firstName', response.data.firstName);
 
             navigation.navigate('studentPanel');
         } catch (err) {

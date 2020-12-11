@@ -29,7 +29,7 @@ export default function TeacherCreate() {
 
         try {
             await api.post('teachers', data);
-            navigation.navigate('studentList');
+            navigation.navigate('teacherLogin');
         } catch (err) {
             alert('Error to create a new teacher');
         }

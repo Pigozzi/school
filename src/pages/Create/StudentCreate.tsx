@@ -25,6 +25,7 @@ export default function StudentDetails() {
 
         try {
             await api.post('students', data);
+
             navigation.navigate('studentLogin');
 
         } catch (err) {

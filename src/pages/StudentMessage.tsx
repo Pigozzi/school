@@ -22,7 +22,7 @@ export default function StudentMessage() {
             <Text style={styles.titleTwo}>Your Attedance Has Been Logged for Today</Text>
 
             <View style={styles.directionCenter}>
-                <Text style={styles.titleThree}>See Your Tommorow!</Text>
+                <Text style={styles.titleThree}>See Your Tomorrow!</Text>
             </View>
             <RectButton style={styles.buttonSubmit} onPress={exitApp}>
                 <Text style={global.buttonTextSubmit}>EXIT</Text>
